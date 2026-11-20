@@ -132,6 +132,13 @@ body {
   border-color: transparent;
 }
 
+@media (prefers-color-scheme: dark) {
+  /* 深色主题下给图标白色底板，避免 GitHub / 维基等黑色镂空图标看不见 */
+  .ico {
+    background: #fff;
+  }
+}
+
 .meta {
   flex: 1;
   min-width: 0;

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>搜索聚合 - 设置</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="head">
+        <img class="logo" src="../icons/icon48.png" alt="" width="44" height="44" />
+        <div>
+          <h1>搜索聚合</h1>
+          <p class="sub">
+            选中网页文字 → 右键 → <b>搜索</b> → 选择引擎。下面的引擎按列表顺序出现在子菜单中。
+          </p>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>搜索引擎</h2>
+          <button id="restore" class="ghost small" type="button">恢复默认</button>
+        </div>
+        <ul id="list" class="list"></ul>
+        <p id="empty" class="empty" hidden>列表是空的，添加一个搜索引擎吧。</p>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2 id="form-title">添加搜索引擎</h2>
+        </div>
+        <form id="form" autocomplete="off">
+          <label class="field">
+            <span>名称</span>
+            <input id="name" type="text" maxlength="24" placeholder="例如：知乎" required />
+          </label>
+          <label class="field">
+            <span>搜索地址</span>
+            <input id="url" type="text" placeholder="https://www.zhihu.com/search?type=content&q=%s" required />
+          </label>
+          <p class="hint">
+            用 <code>%s</code> 代表选中的文字。示例：<code>https://www.google.com/search?q=%s</code>
+          </p>
+          <div class="form-actions">
+            <button type="submit" id="submit" class="primary">添加</button>
+            <button type="button" id="cancel" class="ghost" hidden>取消编辑</button>
+            <span id="msg" class="msg" role="status"></span>
+          </div>
+        </form>
+      </section>
+
+      <p class="foot">
+        提示：Chrome / Edge 的右键子菜单项不支持自定义图标，各网站图标显示在上面的列表中。
+      </p>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

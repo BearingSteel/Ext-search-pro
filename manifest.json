@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "搜索聚合",
-  "version": "1.0.0",
-  "description": "右键选中文字，一键在百度、谷歌、Bilibili、抖音或自定义搜索引擎中搜索。",
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "version": "1.1.0",
+  "description": "__MSG_extDesc__",
   "permissions": ["contextMenus", "storage"],
   "background": {
     "service_worker": "src/background.js",
@@ -10,7 +11,6 @@
   },
   "options_page": "src/options.html",
   "action": {
-    "default_title": "搜索聚合：设置",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png"

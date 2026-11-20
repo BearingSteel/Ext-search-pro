@@ -1,0 +1,163 @@
+{
+  "extName": {
+    "message": "搜索聚合"
+  },
+  "extDesc": {
+    "message": "右键选中文字，一键在百度、必应、知乎、Bilibili、抖音、Google 等或自定义搜索引擎中搜索。"
+  },
+  "menuTitle": {
+    "message": "搜索聚合"
+  },
+  "actionTitle": {
+    "message": "搜索聚合：设置"
+  },
+  "optionsTitle": {
+    "message": "搜索聚合 - 设置"
+  },
+  "optionsDesc": {
+    "message": "选中网页文字 → 右键 → 搜索聚合 → 选择引擎。下面的引擎按列表顺序出现在子菜单中。"
+  },
+  "enginesHeading": {
+    "message": "搜索引擎"
+  },
+  "restore": {
+    "message": "恢复默认"
+  },
+  "empty": {
+    "message": "列表是空的，添加一个搜索引擎吧。"
+  },
+  "addHeading": {
+    "message": "添加搜索引擎"
+  },
+  "editHeading": {
+    "message": "编辑搜索引擎"
+  },
+  "nameLabel": {
+    "message": "名称"
+  },
+  "namePlaceholder": {
+    "message": "例如：维基百科"
+  },
+  "urlLabel": {
+    "message": "搜索地址"
+  },
+  "urlPlaceholder": {
+    "message": "https://zh.wikipedia.org/w/index.php?search=%s"
+  },
+  "urlHint": {
+    "message": "用 %s 代表选中的文字。"
+  },
+  "addBtn": {
+    "message": "添加"
+  },
+  "saveBtn": {
+    "message": "保存"
+  },
+  "cancelBtn": {
+    "message": "取消编辑"
+  },
+  "enableLabel": {
+    "message": "启用"
+  },
+  "editBtn": {
+    "message": "编辑"
+  },
+  "deleteBtn": {
+    "message": "删除"
+  },
+  "toggleTitle": {
+    "message": "是否显示在右键菜单中"
+  },
+  "footNote": {
+    "message": "提示：Chrome / Edge 的右键子菜单项不支持自定义图标，各网站图标显示在上面的列表中。"
+  },
+  "msgSaved": {
+    "message": "已保存"
+  },
+  "msgDeleted": {
+    "message": "已删除"
+  },
+  "msgRestored": {
+    "message": "已恢复默认"
+  },
+  "errName": {
+    "message": "请填写名称"
+  },
+  "errPlaceholder": {
+    "message": "搜索地址里必须包含 %s"
+  },
+  "errInvalidUrl": {
+    "message": "搜索地址不是合法的 URL"
+  },
+  "errProtocol": {
+    "message": "只支持 http / https 地址"
+  },
+  "confirmDelete": {
+    "message": "删除「$NAME$」？",
+    "placeholders": {
+      "NAME": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmRestore": {
+    "message": "恢复内置引擎并删除所有自定义搜索引擎？"
+  },
+  "engineBaidu": {
+    "message": "百度搜索"
+  },
+  "engineSogou": {
+    "message": "搜狗搜索"
+  },
+  "engineBing": {
+    "message": "必应搜索"
+  },
+  "engineZhihu": {
+    "message": "知乎"
+  },
+  "engineWeibo": {
+    "message": "微博"
+  },
+  "engineBilibili": {
+    "message": "Bilibili 搜索"
+  },
+  "engineDouyin": {
+    "message": "抖音搜索"
+  },
+  "engineXiaohongshu": {
+    "message": "小红书"
+  },
+  "engineTaobao": {
+    "message": "淘宝"
+  },
+  "engineJd": {
+    "message": "京东"
+  },
+  "engineGoogle": {
+    "message": "谷歌搜索"
+  },
+  "engineDuckduckgo": {
+    "message": "DuckDuckGo"
+  },
+  "engineYoutube": {
+    "message": "YouTube"
+  },
+  "engineGithub": {
+    "message": "GitHub"
+  },
+  "engineWikipedia": {
+    "message": "维基百科"
+  },
+  "engineReddit": {
+    "message": "Reddit"
+  },
+  "engineX": {
+    "message": "X"
+  },
+  "engineStackoverflow": {
+    "message": "Stack Overflow"
+  },
+  "urlWikipedia": {
+    "message": "https://zh.wikipedia.org/w/index.php?search=%s"
+  }
+}

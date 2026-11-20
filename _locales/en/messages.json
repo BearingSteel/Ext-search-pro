@@ -1,0 +1,163 @@
+{
+  "extName": {
+    "message": "Search Aggregator"
+  },
+  "extDesc": {
+    "message": "Select text, right-click, and search it with Baidu, Bing, Zhihu, Bilibili, Douyin, Google and your own search engines."
+  },
+  "menuTitle": {
+    "message": "Search Aggregator"
+  },
+  "actionTitle": {
+    "message": "Search Aggregator: Settings"
+  },
+  "optionsTitle": {
+    "message": "Search Aggregator - Settings"
+  },
+  "optionsDesc": {
+    "message": "Select text on a page, right-click, open “Search Aggregator”, then pick an engine. Engines appear in the submenu in the order listed below."
+  },
+  "enginesHeading": {
+    "message": "Search engines"
+  },
+  "restore": {
+    "message": "Restore defaults"
+  },
+  "empty": {
+    "message": "The list is empty. Add a search engine below."
+  },
+  "addHeading": {
+    "message": "Add a search engine"
+  },
+  "editHeading": {
+    "message": "Edit search engine"
+  },
+  "nameLabel": {
+    "message": "Name"
+  },
+  "namePlaceholder": {
+    "message": "e.g. Wikipedia"
+  },
+  "urlLabel": {
+    "message": "Search URL"
+  },
+  "urlPlaceholder": {
+    "message": "https://en.wikipedia.org/w/index.php?search=%s"
+  },
+  "urlHint": {
+    "message": "Use %s for the selected text."
+  },
+  "addBtn": {
+    "message": "Add"
+  },
+  "saveBtn": {
+    "message": "Save"
+  },
+  "cancelBtn": {
+    "message": "Cancel"
+  },
+  "enableLabel": {
+    "message": "Show"
+  },
+  "editBtn": {
+    "message": "Edit"
+  },
+  "deleteBtn": {
+    "message": "Delete"
+  },
+  "toggleTitle": {
+    "message": "Show this engine in the right-click menu"
+  },
+  "footNote": {
+    "message": "Note: Chrome / Edge do not support custom icons on context-menu sub-items, so the site icons are shown in the list above."
+  },
+  "msgSaved": {
+    "message": "Saved"
+  },
+  "msgDeleted": {
+    "message": "Deleted"
+  },
+  "msgRestored": {
+    "message": "Defaults restored"
+  },
+  "errName": {
+    "message": "Please enter a name"
+  },
+  "errPlaceholder": {
+    "message": "The search URL must contain %s"
+  },
+  "errInvalidUrl": {
+    "message": "This is not a valid URL"
+  },
+  "errProtocol": {
+    "message": "Only http / https URLs are supported"
+  },
+  "confirmDelete": {
+    "message": "Delete “$NAME$”?",
+    "placeholders": {
+      "NAME": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmRestore": {
+    "message": "Restore built-in engines and remove all custom engines?"
+  },
+  "engineBaidu": {
+    "message": "Baidu"
+  },
+  "engineSogou": {
+    "message": "Sogou"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineZhihu": {
+    "message": "Zhihu"
+  },
+  "engineWeibo": {
+    "message": "Weibo"
+  },
+  "engineBilibili": {
+    "message": "Bilibili"
+  },
+  "engineDouyin": {
+    "message": "Douyin"
+  },
+  "engineXiaohongshu": {
+    "message": "Xiaohongshu"
+  },
+  "engineTaobao": {
+    "message": "Taobao"
+  },
+  "engineJd": {
+    "message": "JD.com"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "engineDuckduckgo": {
+    "message": "DuckDuckGo"
+  },
+  "engineYoutube": {
+    "message": "YouTube"
+  },
+  "engineGithub": {
+    "message": "GitHub"
+  },
+  "engineWikipedia": {
+    "message": "Wikipedia"
+  },
+  "engineReddit": {
+    "message": "Reddit"
+  },
+  "engineX": {
+    "message": "X"
+  },
+  "engineStackoverflow": {
+    "message": "Stack Overflow"
+  },
+  "urlWikipedia": {
+    "message": "https://en.wikipedia.org/w/index.php?search=%s"
+  }
+}

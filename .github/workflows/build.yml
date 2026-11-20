@@ -23,7 +23,7 @@ jobs:
         run: |
           mkdir -p dist
           ZIP="dist/search-aggregator-v${{ steps.version.outputs.value }}.zip"
-          zip -r "$ZIP" manifest.json src icons README.md -x '*.DS_Store'
+          zip -r "$ZIP" manifest.json _locales src icons README.md LICENSE -x '*.DS_Store'
           unzip -l "$ZIP"
 
       - name: Upload artifact

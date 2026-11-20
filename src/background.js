@@ -1,24 +1,41 @@
-import { DEFAULT_ENGINES } from './engines.js';
+import { defaultEngines, mergeEngines } from './engines.js';
 
 const STORAGE_KEY = 'engines';
+const SCHEMA_KEY = 'enginesSchema';
+const SCHEMA_VERSION = 2;
 const ROOT_ID = 'search-root';
 const ITEM_PREFIX = 'engine:';
 
-const defaultEngines = () =>
-  DEFAULT_ENGINES.map((engine) => ({ ...engine, enabled: true }));
+const t = (key) => chrome.i18n.getMessage(key) || key;
 
 async function loadEngines() {
   const data = await chrome.storage.local.get(STORAGE_KEY);
   return Array.isArray(data[STORAGE_KEY]) ? data[STORAGE_KEY] : null;
 }
 
-// 首次使用（或数据被清空）时写入内置引擎。
+// 首次使用时写入内置引擎；老版本升级时把新增的内置引擎合并进列表。
 async function ensureEngines() {
-  const engines = await loadEngines();
-  if (engines !== null) return engines;
-  const seeded = defaultEngines();
-  await chrome.storage.local.set({ [STORAGE_KEY]: seeded });
-  return seeded;
+  const data = await chrome.storage.local.get([STORAGE_KEY, SCHEMA_KEY]);
+  const stored = Array.isArray(data[STORAGE_KEY]) ? data[STORAGE_KEY] : null;
+
+  if (stored === null) {
+    const seeded = defaultEngines();
+    await chrome.storage.local.set({
+      [STORAGE_KEY]: seeded,
+      [SCHEMA_KEY]: SCHEMA_VERSION
+    });
+    return seeded;
+  }
+
+  if ((data[SCHEMA_KEY] || 1) >= SCHEMA_VERSION) return stored;
+
+  const merged = mergeEngines(stored);
+
+  await chrome.storage.local.set({
+    [STORAGE_KEY]: merged,
+    [SCHEMA_KEY]: SCHEMA_VERSION
+  });
+  return merged;
 }
 
 function createMenuItem(props) {
@@ -45,7 +62,7 @@ async function doRebuildMenus() {
 
   createMenuItem({
     id: ROOT_ID,
-    title: '搜索',
+    title: t('menuTitle'),
     contexts: ['selection']
   });
 
@@ -85,9 +102,13 @@ chrome.contextMenus.onClicked.addListener((info) => {
 
 chrome.runtime.onInstalled.addListener(() => {
   ensureEngines().then(rebuildMenus, console.error);
+  chrome.action.setTitle({ title: t('actionTitle') });
 });
 
-chrome.runtime.onStartup.addListener(rebuildMenus);
+chrome.runtime.onStartup.addListener(() => {
+  chrome.action.setTitle({ title: t('actionTitle') });
+  rebuildMenus();
+});
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && changes[STORAGE_KEY]) rebuildMenus();

@@ -1,7 +1,10 @@
-import { DEFAULT_ENGINES } from './engines.js';
+import { defaultEngines, mergeEngines } from './engines.js';
 
 const STORAGE_KEY = 'engines';
+const SCHEMA_KEY = 'enginesSchema';
+const SCHEMA_VERSION = 2;
 const $ = (id) => document.getElementById(id);
+const t = (key) => chrome.i18n.getMessage(key) || key;
 
 const listEl = $('list');
 const emptyEl = $('empty');
@@ -18,16 +21,34 @@ let engines = [];
 let editingId = null;
 let msgTimer = 0;
 
-const defaultList = () =>
-  DEFAULT_ENGINES.map((engine) => ({ ...engine, enabled: true }));
+function localize() {
+  const lang = chrome.i18n.getUILanguage();
+  document.documentElement.lang = lang;
+  document.title = t('optionsTitle');
+
+  for (const el of document.querySelectorAll('[data-i18n]')) {
+    const text = chrome.i18n.getMessage(el.dataset.i18n);
+    if (text) el.textContent = text;
+  }
+  for (const el of document.querySelectorAll('[data-i18n-placeholder]')) {
+    const text = chrome.i18n.getMessage(el.dataset.i18nPlaceholder);
+    if (text) el.placeholder = text;
+  }
+}
 
 async function load() {
-  const data = await chrome.storage.local.get(STORAGE_KEY);
+  const data = await chrome.storage.local.get([STORAGE_KEY, SCHEMA_KEY]);
   if (Array.isArray(data[STORAGE_KEY])) {
     engines = data[STORAGE_KEY];
+    if ((data[SCHEMA_KEY] || 1) < SCHEMA_VERSION) {
+      engines = mergeEngines(engines);
+      await save();
+      await chrome.storage.local.set({ [SCHEMA_KEY]: SCHEMA_VERSION });
+    }
   } else {
-    engines = defaultList();
+    engines = defaultEngines();
     await save();
+    await chrome.storage.local.set({ [SCHEMA_KEY]: SCHEMA_VERSION });
   }
   render();
 }
@@ -83,7 +104,7 @@ function render() {
 
     const toggleLabel = document.createElement('label');
     toggleLabel.className = 'toggle';
-    toggleLabel.title = '是否显示在右键菜单中';
+    toggleLabel.title = t('toggleTitle');
     const toggle = document.createElement('input');
     toggle.type = 'checkbox';
     toggle.checked = engine.enabled !== false;
@@ -92,7 +113,7 @@ function render() {
       li.classList.toggle('off', !toggle.checked);
       save();
     });
-    toggleLabel.append(toggle, document.createTextNode('启用'));
+    toggleLabel.append(toggle, document.createTextNode(t('enableLabel')));
 
     const ops = document.createElement('div');
     ops.className = 'ops';
@@ -100,13 +121,13 @@ function render() {
     const editBtn = document.createElement('button');
     editBtn.type = 'button';
     editBtn.className = 'ghost small';
-    editBtn.textContent = '编辑';
+    editBtn.textContent = t('editBtn');
     editBtn.addEventListener('click', () => startEdit(engine));
 
     const delBtn = document.createElement('button');
     delBtn.type = 'button';
     delBtn.className = 'ghost small danger';
-    delBtn.textContent = '删除';
+    delBtn.textContent = t('deleteBtn');
     delBtn.addEventListener('click', () => remove(engine));
 
     ops.append(editBtn, delBtn);
@@ -119,8 +140,8 @@ function startEdit(engine) {
   editingId = engine.id;
   nameEl.value = engine.name;
   urlEl.value = engine.url;
-  formTitle.textContent = '编辑搜索引擎';
-  submitBtn.textContent = '保存';
+  formTitle.textContent = t('editHeading');
+  submitBtn.textContent = t('saveBtn');
   cancelBtn.hidden = false;
   setMsg('');
   nameEl.focus();
@@ -130,19 +151,19 @@ function startEdit(engine) {
 function resetForm() {
   editingId = null;
   formEl.reset();
-  formTitle.textContent = '添加搜索引擎';
-  submitBtn.textContent = '添加';
+  formTitle.textContent = t('addHeading');
+  submitBtn.textContent = t('addBtn');
   cancelBtn.hidden = true;
   setMsg('');
 }
 
 async function remove(engine) {
-  if (!confirm(`删除「${engine.name}」？`)) return;
+  if (!confirm(chrome.i18n.getMessage('confirmDelete', [engine.name]))) return;
   engines = engines.filter((item) => item.id !== engine.id);
   await save();
   if (editingId === engine.id) resetForm();
   render();
-  setMsg('已删除');
+  setMsg(t('msgDeleted'));
 }
 
 formEl.addEventListener('submit', async (event) => {
@@ -150,17 +171,17 @@ formEl.addEventListener('submit', async (event) => {
   const name = nameEl.value.trim();
   const url = urlEl.value.trim();
 
-  if (!name) return setMsg('请填写名称', true);
-  if (!url.includes('%s')) return setMsg('搜索地址里必须包含 %s', true);
+  if (!name) return setMsg(t('errName'), true);
+  if (!url.includes('%s')) return setMsg(t('errPlaceholder'), true);
 
   let parsed;
   try {
     parsed = new URL(url);
   } catch {
-    return setMsg('搜索地址不是合法的 URL', true);
+    return setMsg(t('errInvalidUrl'), true);
   }
   if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
-    return setMsg('只支持 http / https 地址', true);
+    return setMsg(t('errProtocol'), true);
   }
 
   if (editingId) {
@@ -181,18 +202,19 @@ formEl.addEventListener('submit', async (event) => {
   await save();
   resetForm();
   render();
-  setMsg('已保存');
+  setMsg(t('msgSaved'));
 });
 
 cancelBtn.addEventListener('click', resetForm);
 
 restoreBtn.addEventListener('click', async () => {
-  if (!confirm('恢复内置引擎并删除所有自定义搜索引擎？')) return;
-  engines = defaultList();
+  if (!confirm(t('confirmRestore'))) return;
+  engines = defaultEngines();
   await save();
   resetForm();
   render();
-  setMsg('已恢复默认');
+  setMsg(t('msgRestored'));
 });
 
+localize();
 load();

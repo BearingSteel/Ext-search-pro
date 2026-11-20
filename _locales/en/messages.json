@@ -159,5 +159,8 @@
   },
   "urlWikipedia": {
     "message": "https://en.wikipedia.org/w/index.php?search=%s"
+  },
+  "menuEdit": {
+    "message": "Edit submenu"
   }
 }

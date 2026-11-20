@@ -17,6 +17,7 @@ A lightweight Chrome / Edge extension: select text on a page, right-click, and s
   - 国外：Google、DuckDuckGo、YouTube、GitHub、维基百科、Reddit、X、Stack Overflow
 - 自定义搜索引擎：任意网站，只要搜索地址里用 `%s` 占位即可。
 - 设置页可添加 / 编辑 / 删除 / 启用停用引擎，一键恢复默认。
+- 子菜单底部有「二级菜单编辑」入口，点一下直接打开设置页。
 - 界面语言跟随浏览器：简体中文环境显示中文，其余环境显示英文。
 - 所有配置保存在浏览器本地（`chrome.storage.local`），不上传任何数据。
 - 只申请 `contextMenus` 和 `storage` 权限，不需要访问网页内容。
@@ -110,6 +111,7 @@ zip -r search-aggregator.zip manifest.json _locales src icons README.md LICENSE 
   - Global: Google, DuckDuckGo, YouTube, GitHub, Wikipedia, Reddit, X, Stack Overflow
 - Custom engines: any site whose search URL accepts a `%s` placeholder.
 - Settings page to add, edit, delete, enable or disable engines, plus a one-click reset.
+- An “Edit submenu” entry at the bottom of the submenu opens the settings page directly.
 - UI language follows the browser: Simplified Chinese and English are bundled.
 - Everything is stored locally (`chrome.storage.local`); nothing is uploaded.
 - Only `contextMenus` and `storage` permissions — no page access required.

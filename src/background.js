@@ -5,6 +5,8 @@ const SCHEMA_KEY = 'enginesSchema';
 const SCHEMA_VERSION = 2;
 const ROOT_ID = 'search-root';
 const ITEM_PREFIX = 'engine:';
+const SETTINGS_ID = 'menu-settings';
+const SETTINGS_SEP_ID = 'menu-settings-separator';
 
 const t = (key) => chrome.i18n.getMessage(key) || key;
 
@@ -74,6 +76,21 @@ async function doRebuildMenus() {
       contexts: ['selection']
     });
   }
+
+  if (engines.length > 0) {
+    createMenuItem({
+      id: SETTINGS_SEP_ID,
+      parentId: ROOT_ID,
+      type: 'separator',
+      contexts: ['selection']
+    });
+  }
+  createMenuItem({
+    id: SETTINGS_ID,
+    parentId: ROOT_ID,
+    title: t('menuEdit'),
+    contexts: ['selection']
+  });
 }
 
 async function handleSearch(engineId, rawText) {
@@ -96,6 +113,10 @@ async function handleSearch(engineId, rawText) {
 
 chrome.contextMenus.onClicked.addListener((info) => {
   if (typeof info.menuItemId !== 'string') return;
+  if (info.menuItemId === SETTINGS_ID) {
+    chrome.runtime.openOptionsPage();
+    return;
+  }
   if (!info.menuItemId.startsWith(ITEM_PREFIX)) return;
   handleSearch(info.menuItemId.slice(ITEM_PREFIX.length), info.selectionText);
 });

@@ -159,5 +159,8 @@
   },
   "urlWikipedia": {
     "message": "https://zh.wikipedia.org/w/index.php?search=%s"
+  },
+  "menuEdit": {
+    "message": "二级菜单编辑"
   }
 }
